@@ -30,8 +30,7 @@ public class SolveQuizService {
 
         User user = currentUserService.getCurrentUser();
 
-        UserQuiz userQuiz = new UserQuiz(user, quiz);
-        userQuizRepository.save(userQuiz);
+        userQuizRepository.save(new UserQuiz(user, quiz));
 
         return QuizResponse.builder()
                 .answer(quiz.getAnswer().equals(request.getPickId()))
