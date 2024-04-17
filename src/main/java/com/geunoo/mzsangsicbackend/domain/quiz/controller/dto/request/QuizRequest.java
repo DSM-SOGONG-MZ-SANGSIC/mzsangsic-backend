@@ -7,5 +7,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class QuizRequest {
 
-    private Long pick_id;
+    private Long pickId;
 }

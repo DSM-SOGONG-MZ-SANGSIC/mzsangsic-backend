@@ -7,6 +7,6 @@ import lombok.Getter;
 @Builder
 public class QuizResponse {
 
-    private Boolean answer;
+    private boolean answer;
     private String commentation;
 }

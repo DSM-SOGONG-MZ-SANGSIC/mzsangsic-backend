@@ -1,6 +1,7 @@
 package com.geunoo.mzsangsicbackend.global.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.geunoo.mzsangsicbackend.domain.user.entity.User;
 import com.geunoo.mzsangsicbackend.global.error.ExceptionFilter;
 import com.gil.easyjwt.jwt.JwtFilter;
 import com.gil.easyjwt.jwt.JwtTokenProvider;
@@ -42,5 +43,10 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public CurrentUserService<User> currentUserService() {
+        return new CurrentUserService<>();
     }
 }
