@@ -35,11 +35,16 @@ public class User extends JwtUser {
     @Column(columnDefinition = "VARCHAR(255)")
     private String profileUrl;
 
+    @NotNull
+    @Column(columnDefinition = "VARCHAR(255)")
+    private String sub;
+
     @Builder
-    public User(String email, String name, String profileUrl) {
+    public User(String email, String name, String profileUrl, String sub) {
         this.email = email;
         this.name = name;
         this.profileUrl = profileUrl;
+        this.sub = sub;
     }
 
     @Override
