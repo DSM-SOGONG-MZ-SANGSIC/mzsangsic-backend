@@ -29,9 +29,10 @@ public class ExceptionFilter extends OncePerRequestFilter {
         } catch (Exception e) {
             if (e.getCause() instanceof CustomException exception) {
                 writeErrorResponse(response, exception);
-            } else if (e.getCause() instanceof EasyJwtException exception) {
+            } else if (e instanceof EasyJwtException exception) {
                 writeErrorResponse(response, new UnauthorizedException(exception.getMessage()));
             } else {
+                e.printStackTrace();
                 writeErrorResponse(response, new InternalServerErrorException());
             }
         }
