@@ -1,7 +1,7 @@
 package com.geunoo.mzsangsicbackend.domain.quiz.controller;
 
 import com.geunoo.mzsangsicbackend.domain.quiz.controller.dto.request.QuizRequest;
-import com.geunoo.mzsangsicbackend.domain.quiz.controller.dto.response.QuizResponse;
+import com.geunoo.mzsangsicbackend.domain.quiz.controller.dto.response.AnswerResponse;
 import com.geunoo.mzsangsicbackend.domain.quiz.service.SolveQuizService;
 import com.geunoo.mzsangsicbackend.domain.quiz.service.UserQuizService;
 import jakarta.validation.Valid;
@@ -19,7 +19,7 @@ public class QuizController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/{quiz-id}")
-    public QuizResponse solvingQuiz(@PathVariable("quiz-id") Long quizId, @RequestBody @Valid QuizRequest request) {
+    public AnswerResponse solvingQuiz(@PathVariable("quiz-id") Long quizId, @RequestBody @Valid QuizRequest request) {
         return solveQuizService.execute(quizId, request);
     }
 

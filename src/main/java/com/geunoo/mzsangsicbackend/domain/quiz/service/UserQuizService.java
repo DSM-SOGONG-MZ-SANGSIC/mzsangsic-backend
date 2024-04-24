@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -23,9 +22,9 @@ public class UserQuizService {
 
     @Transactional
     public void execute(Long quizId) {
-        Optional<Quiz> optionalQuiz = quizRepository.findById(quizId);
-        Quiz quiz = optionalQuiz.orElseThrow(() -> new NotFoundException("문제를 찾지 못했습니다."));
         User user = currentUserService.getCurrentUser();
+        Quiz quiz = quizRepository.findById(quizId)
+                .orElseThrow(() -> new NotFoundException("문제를 찾지 못했습니다."));
 
         userQuizRepository.save(new UserQuiz(user, quiz));
 

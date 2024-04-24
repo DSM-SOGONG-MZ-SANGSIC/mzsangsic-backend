@@ -1,7 +1,7 @@
 package com.geunoo.mzsangsicbackend.domain.quiz.service;
 
 import com.geunoo.mzsangsicbackend.domain.quiz.controller.dto.request.QuizRequest;
-import com.geunoo.mzsangsicbackend.domain.quiz.controller.dto.response.QuizResponse;
+import com.geunoo.mzsangsicbackend.domain.quiz.controller.dto.response.AnswerResponse;
 import com.geunoo.mzsangsicbackend.domain.quiz.entity.*;
 import com.geunoo.mzsangsicbackend.domain.quiz.entity.repository.SolvedQuizRepository;
 import com.geunoo.mzsangsicbackend.domain.quiz.entity.repository.QuizRepository;
@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -23,15 +22,15 @@ public class SolveQuizService {
     private final SolvedQuizRepository solvedQuizRepository;
 
     @Transactional
-    public QuizResponse execute(Long quizId, QuizRequest request) {
-        Optional<Quiz> optionalQuiz = quizRepository.findById(quizId);
-        Quiz quiz = optionalQuiz.orElseThrow(() -> new NotFoundException("문제를 찾지 못했습니다."));
+    public AnswerResponse execute(Long quizId, QuizRequest request) {
         User user = currentUserService.getCurrentUser();
+        Quiz quiz = quizRepository.findById(quizId)
+                .orElseThrow(() -> new NotFoundException("문제를 찾지 못했습니다."));
         Pick pick = new Pick(quiz.getContent(), quiz);
 
         solvedQuizRepository.save(new SolvedQuiz(quiz, pick, user));
 
-        return QuizResponse.builder()
+        return AnswerResponse.builder()
                 .answer(quiz.getAnswer().equals(request.getPickId()))
                 .commentation(quiz.getCommentation())
                 .build();
