@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class QuizResponse {
+public class AnswerResponse {
 
     private boolean answer;
     private String commentation;
