@@ -36,6 +36,11 @@ jobs:
           access_key: ${{ secrets.XQUARE_ACCESS_KEY }}
           github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           buildargs: |
-            MYSQL_HOST=${{ secrets.MYSQL_HOST }}
-            MYSQL_USERNAME=${{ secrets.MYSQL_USERNAME }}
-            MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}
+            DB_URL=${{ secrets.DB_URL }}
+            DB_NAME=${{ secrets.DB_NAME }}
+            DB_USERNAME=${{ secrets.DB_USERNAME }}
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
+            GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}
+            GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}
+            GOOGLE_REDIRECT_URI=${{ secrets.GOOGLE_REDIRECT_URI }}
