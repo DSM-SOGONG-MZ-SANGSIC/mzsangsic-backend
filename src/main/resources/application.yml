@@ -18,7 +18,9 @@ spring:
 
   jackson:
     property-naming-strategy: SNAKE_CASE
-
+server:
+  servlet:
+    context-path: /mz-sangsic
 easy-jwt:
   access-exp: ${ACCESS_EXP:81400}
   refresh-exp: ${REFRESH_EXP:0}
