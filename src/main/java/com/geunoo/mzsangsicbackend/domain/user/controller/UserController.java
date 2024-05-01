@@ -15,7 +15,7 @@ public class UserController {
 
     private final GoogleLoginService googleLoginService;
 
-    @PostMapping("google")
+    @PostMapping("/google")
     public TokenResponse googleLogin(
         @RequestParam("code") String code
     ) {
