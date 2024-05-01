@@ -1,5 +1,5 @@
 config:
-  name: mz
+  name: mz-sangsic
   service_type: be
   port: 8080
   prefix: "/mz-sangsic"
