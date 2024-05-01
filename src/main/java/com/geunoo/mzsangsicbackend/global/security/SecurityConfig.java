@@ -31,9 +31,9 @@ public class SecurityConfig {
             .csrf(CsrfConfigurer::disable)
             .cors(Customizer.withDefaults())
             .sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(
-                authorize ->
-                    authorize.anyRequest().permitAll()
+            .authorizeHttpRequests(authorize ->
+                authorize
+                    .anyRequest().permitAll()
             )
             .addFilterBefore(new JwtFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
             .addFilterBefore(new ExceptionFilter(objectMapper), JwtFilter.class)
