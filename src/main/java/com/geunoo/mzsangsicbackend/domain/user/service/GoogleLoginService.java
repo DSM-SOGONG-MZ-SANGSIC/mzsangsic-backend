@@ -1,6 +1,7 @@
 package com.geunoo.mzsangsicbackend.domain.user.service;
 
 import com.geunoo.mzsangsicbackend.domain.user.controller.dto.response.TokenResponse;
+import com.geunoo.mzsangsicbackend.domain.user.controller.dto.response.UrlResponse;
 import com.geunoo.mzsangsicbackend.domain.user.entity.User;
 import com.geunoo.mzsangsicbackend.domain.user.entity.repository.UserRepository;
 import com.geunoo.mzsangsicbackend.thirdparty.api.google.GoogleClient;
@@ -46,5 +47,15 @@ public class GoogleLoginService {
 
         googleOauthClient.revokeAccessToken(tokens.getAccessToken());
         return new TokenResponse(jwtTokenProvider.generateAccessToken(user.getEmail()));
+    }
+
+    public UrlResponse getOauthUrl() {
+        return new UrlResponse(
+            "https://accounts.google.com/o/oauth2/v2/auth" +
+            "?client_id=" + googleProperties.getClientId() +
+            "&redirect_uri=" + googleProperties.getRedirectUri() +
+            "&response_type=code" +
+            "&scope=https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile"
+        );
     }
 }
