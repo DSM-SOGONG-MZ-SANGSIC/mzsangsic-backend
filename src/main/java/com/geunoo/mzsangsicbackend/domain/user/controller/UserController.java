@@ -24,6 +24,13 @@ public class UserController {
         return googleLoginService.execute(code);
     }
 
+    @PostMapping("/google/ios")
+    public TokenResponse googleLoginWithIOS(
+        @RequestParam("token") String token
+    ) {
+        return googleLoginService.ios(token);
+    }
+
     @GetMapping("/oauth")
     public UrlResponse getOauthUrl() {
         return googleLoginService.getOauthUrl();

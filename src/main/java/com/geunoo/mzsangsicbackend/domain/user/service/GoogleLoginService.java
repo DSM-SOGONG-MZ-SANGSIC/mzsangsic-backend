@@ -49,6 +49,24 @@ public class GoogleLoginService {
         return new TokenResponse(jwtTokenProvider.generateAccessToken(user.getEmail()));
     }
 
+    @Transactional
+    public TokenResponse ios(String token) {
+        UserInfoResponse userInfo = googleClient.getUserInfo("json", token);
+
+        User user = userRepository.findBySub(userInfo.getSub())
+            .orElseGet(() -> userRepository.save(
+                User.builder()
+                    .email(userInfo.getEmail())
+                    .name(userInfo.getName())
+                    .profileUrl(userInfo.getPicture())
+                    .sub(userInfo.getSub())
+                    .build()
+            ));
+
+        googleOauthClient.revokeAccessToken(token);
+        return new TokenResponse(jwtTokenProvider.generateAccessToken(user.getEmail()));
+    }
+
     public UrlResponse getOauthUrl() {
         return new UrlResponse(
             "https://accounts.google.com/o/oauth2/v2/auth" +
