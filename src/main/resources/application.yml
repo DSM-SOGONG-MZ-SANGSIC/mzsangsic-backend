@@ -18,6 +18,7 @@ spring:
 
   jackson:
     property-naming-strategy: SNAKE_CASE
+    
 server:
   servlet:
     context-path: /mz-sangsic
