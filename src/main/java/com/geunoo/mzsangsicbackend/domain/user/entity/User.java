@@ -56,4 +56,8 @@ public class User extends JwtUser {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
     }
+
+    public void setProfileImageUrl(String profileUrl) {
+        this.profileUrl = profileUrl;
+    }
 }
