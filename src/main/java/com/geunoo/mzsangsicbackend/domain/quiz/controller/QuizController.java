@@ -4,12 +4,11 @@ import com.geunoo.mzsangsicbackend.domain.quiz.controller.dto.request.QuizReques
 import com.geunoo.mzsangsicbackend.domain.quiz.controller.dto.response.AnswerResponse;
 import com.geunoo.mzsangsicbackend.domain.quiz.controller.dto.response.QueryPickResponse;
 import com.geunoo.mzsangsicbackend.domain.quiz.controller.dto.response.QueryQuizListResponse;
+import com.geunoo.mzsangsicbackend.domain.quiz.controller.dto.response.SavedQuizListResponse;
 import com.geunoo.mzsangsicbackend.domain.quiz.entity.Category;
-import com.geunoo.mzsangsicbackend.domain.quiz.service.QueryPickService;
-import com.geunoo.mzsangsicbackend.domain.quiz.service.QueryQuizService;
-import com.geunoo.mzsangsicbackend.domain.quiz.service.SolveQuizService;
-import com.geunoo.mzsangsicbackend.domain.quiz.service.UserQuizService;
+import com.geunoo.mzsangsicbackend.domain.quiz.service.*;
 import jakarta.validation.Valid;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +29,7 @@ public class QuizController {
     private final UserQuizService userQuizService;
     private final QueryQuizService queryQuizService;
     private final QueryPickService queryPickService;
+    private final SavedQuizService savedQuizService;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/{quiz-id}")
@@ -51,5 +51,10 @@ public class QuizController {
     @GetMapping("/pick/{quiz-id}")
     public QueryPickResponse queryPicks(@PathVariable("quiz-id") Long quizId) {
         return queryPickService.execute(quizId);
+    }
+
+    @GetMapping("/saved")
+    public SavedQuizListResponse savedQuiz() {
+        return savedQuizService.execute();
     }
 }
