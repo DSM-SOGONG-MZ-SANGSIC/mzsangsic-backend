@@ -43,4 +43,8 @@ public class Friend {
         this.applieUser = applieUser;
         this.isAccept = isAccept;
     }
+
+    public void acceptFriend() {
+        this.isAccept = true;
+    }
 }
