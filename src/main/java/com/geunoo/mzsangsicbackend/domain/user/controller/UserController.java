@@ -1,16 +1,16 @@
 package com.geunoo.mzsangsicbackend.domain.user.controller;
 
+import com.geunoo.mzsangsicbackend.domain.quiz.controller.dto.request.QuizRequest;
+import com.geunoo.mzsangsicbackend.domain.user.controller.dto.request.ProfileRequest;
 import com.geunoo.mzsangsicbackend.domain.user.controller.dto.response.QueryUserResponse;
 import com.geunoo.mzsangsicbackend.domain.user.controller.dto.response.TokenResponse;
 import com.geunoo.mzsangsicbackend.domain.user.controller.dto.response.UrlResponse;
 import com.geunoo.mzsangsicbackend.domain.user.service.GoogleLoginService;
+import com.geunoo.mzsangsicbackend.domain.user.service.UserProfileService;
+import jakarta.validation.Valid;
 import com.geunoo.mzsangsicbackend.domain.user.service.QueryUserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RequestMapping("/users")
@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final GoogleLoginService googleLoginService;
+    private final UserProfileService userProfileService;
     private final QueryUserService queryUserService;
 
     @PostMapping("/google")
@@ -42,5 +43,10 @@ public class UserController {
     @GetMapping
     public QueryUserResponse queryUsers() {
         return queryUserService.execute();
+    }
+
+    @PatchMapping("/profile")
+    public void userProfile(@RequestBody @Valid ProfileRequest request) {
+        userProfileService.execute(request);
     }
 }
