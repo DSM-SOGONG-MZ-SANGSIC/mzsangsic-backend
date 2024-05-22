@@ -18,7 +18,7 @@ public class QueryApplyUsersService {
     public QueryApplyUsersResponse execute() {
         User appliedUser = currentUserService.getCurrentUser();
         return new QueryApplyUsersResponse(
-            friendRepository.findAllByApplieUserIdAndAccept(appliedUser.getId(), false).stream()
+            friendRepository.findAllByApplieUserIdAndIsAccept(appliedUser.getId(), false).stream()
                 .map(friend ->
                     new QueryUserResponse.UserResponse(
                         friend.getApplyUser().getId(),
