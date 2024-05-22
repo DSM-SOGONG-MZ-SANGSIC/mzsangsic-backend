@@ -1,8 +1,10 @@
 package com.geunoo.mzsangsicbackend.domain.user.controller;
 
+import com.geunoo.mzsangsicbackend.domain.user.controller.dto.response.QueryUserResponse;
 import com.geunoo.mzsangsicbackend.domain.user.controller.dto.response.TokenResponse;
 import com.geunoo.mzsangsicbackend.domain.user.controller.dto.response.UrlResponse;
 import com.geunoo.mzsangsicbackend.domain.user.service.GoogleLoginService;
+import com.geunoo.mzsangsicbackend.domain.user.service.QueryUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final GoogleLoginService googleLoginService;
+    private final QueryUserService queryUserService;
 
     @PostMapping("/google")
     public TokenResponse googleLogin(
@@ -34,5 +37,10 @@ public class UserController {
     @GetMapping("/oauth")
     public UrlResponse getOauthUrl() {
         return googleLoginService.getOauthUrl();
+    }
+
+    @GetMapping
+    public QueryUserResponse queryUsers() {
+        return queryUserService.execute();
     }
 }
