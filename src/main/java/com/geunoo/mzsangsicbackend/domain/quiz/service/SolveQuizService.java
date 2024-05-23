@@ -28,8 +28,8 @@ public class SolveQuizService {
         User user = currentUserService.getCurrentUser();
         Quiz quiz = quizRepository.findById(quizId)
                 .orElseThrow(() -> new NotFoundException("문제를 찾지 못했습니다."));
-        Pick pick = new Pick(quiz.getContent(), quiz);
-        pickRepository.save(pick);
+        Pick pick = pickRepository.findById(request.getPickId())
+                .orElseThrow(() -> new NotFoundException("선택한 답을 찾지 못했습니다."));
 
         solvedQuizRepository.save(new SolvedQuiz(quiz, pick, user));
 
