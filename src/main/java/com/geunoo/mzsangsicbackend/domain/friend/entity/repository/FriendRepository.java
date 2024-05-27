@@ -11,9 +11,9 @@ public interface FriendRepository extends JpaRepository<Friend, Long> {
 
     List<Friend> findAllByApplyUserIdOrApplieUserIdAndIsAccept(Long userId1, Long userId2, boolean accept);
 
+    List<Friend> findAllByApplyUserIdAndIsAccept(Long applyUserId, boolean accept);
+
     Optional<Friend> findByApplieUserIdAndApplyUserId(Long appliedUserId, Long applyUserId);
 
     List<Friend> findAllByApplieUserIdAndIsAccept(Long appliedUserId, boolean accept);
-
-    List<Friend> findAllByQuiz(Quiz quiz);
 }
