@@ -4,6 +4,7 @@ import com.geunoo.mzsangsicbackend.domain.friend.entity.Friend;
 import com.geunoo.mzsangsicbackend.domain.friend.entity.repository.FriendRepository;
 import com.geunoo.mzsangsicbackend.domain.user.entity.User;
 import com.geunoo.mzsangsicbackend.domain.user.entity.repository.UserRepository;
+import com.geunoo.mzsangsicbackend.global.error.exceptions.ConflictException;
 import com.geunoo.mzsangsicbackend.global.error.exceptions.NotFoundException;
 import com.gil.easyjwt.user.CurrentUserService;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,10 @@ public class CreateFriendService {
         User applyUser = currentUserService.getCurrentUser();
         User applieUser = userRepository.findById(userId)
             .orElseThrow(() -> new NotFoundException("User Not Found"));
+
+        if (friendRepository.findByApplieUserIdAndApplyUserId(applieUser.getId(), applyUser.getId()).isPresent()) {
+            throw new ConflictException("Friend Already Exists");
+        }
 
         friendRepository.save(new Friend(applyUser, applieUser, false));
     }
