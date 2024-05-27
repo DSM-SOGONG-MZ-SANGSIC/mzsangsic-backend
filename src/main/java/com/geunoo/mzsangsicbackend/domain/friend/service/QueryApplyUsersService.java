@@ -7,6 +7,7 @@ import com.geunoo.mzsangsicbackend.domain.user.entity.User;
 import com.gil.easyjwt.user.CurrentUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -15,6 +16,7 @@ public class QueryApplyUsersService {
     private final FriendRepository friendRepository;
     private final CurrentUserService<User> currentUserService;
 
+    @Transactional(readOnly = true)
     public QueryApplyUsersResponse execute() {
         User appliedUser = currentUserService.getCurrentUser();
         return new QueryApplyUsersResponse(
