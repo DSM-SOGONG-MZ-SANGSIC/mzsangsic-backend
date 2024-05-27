@@ -2,14 +2,20 @@ package com.geunoo.mzsangsicbackend.domain.quiz.controller;
 
 import com.geunoo.mzsangsicbackend.domain.quiz.controller.dto.request.QuizRequest;
 import com.geunoo.mzsangsicbackend.domain.quiz.controller.dto.response.AnswerResponse;
+import com.geunoo.mzsangsicbackend.domain.quiz.controller.dto.response.QueryFriendAnswerResponse;
 import com.geunoo.mzsangsicbackend.domain.quiz.controller.dto.response.QueryPickResponse;
 import com.geunoo.mzsangsicbackend.domain.quiz.controller.dto.response.QueryQuizListResponse;
 import com.geunoo.mzsangsicbackend.domain.quiz.controller.dto.response.QueryQuizRateResponse;
 import com.geunoo.mzsangsicbackend.domain.quiz.controller.dto.response.SavedQuizListResponse;
 import com.geunoo.mzsangsicbackend.domain.quiz.entity.Category;
-import com.geunoo.mzsangsicbackend.domain.quiz.service.*;
+import com.geunoo.mzsangsicbackend.domain.quiz.service.QueryFriendAnswerService;
+import com.geunoo.mzsangsicbackend.domain.quiz.service.QueryPickService;
+import com.geunoo.mzsangsicbackend.domain.quiz.service.QueryQuizRateService;
+import com.geunoo.mzsangsicbackend.domain.quiz.service.QueryQuizService;
+import com.geunoo.mzsangsicbackend.domain.quiz.service.SavedQuizService;
+import com.geunoo.mzsangsicbackend.domain.quiz.service.SolveQuizService;
+import com.geunoo.mzsangsicbackend.domain.quiz.service.UserQuizService;
 import jakarta.validation.Valid;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +38,7 @@ public class QuizController {
     private final QueryPickService queryPickService;
     private final SavedQuizService savedQuizService;
     private final QueryQuizRateService queryQuizRateService;
+    private final QueryFriendAnswerService queryFriendAnswerService;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/{quiz-id}")
@@ -63,5 +70,10 @@ public class QuizController {
     @GetMapping("/percentage/{user-id}")
     public QueryQuizRateResponse queryQuizRate(@PathVariable("user-id") Long userId) {
         return queryQuizRateService.execute(userId);
+    }
+
+    @GetMapping("/friend/{quiz-id}")
+    public QueryFriendAnswerResponse FriendAnswer(@PathVariable("quiz-id") Long quizId) {
+        return queryFriendAnswerService.execute(quizId);
     }
 }
