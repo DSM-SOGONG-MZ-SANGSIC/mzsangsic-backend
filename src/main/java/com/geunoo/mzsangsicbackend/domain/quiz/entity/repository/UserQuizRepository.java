@@ -9,4 +9,6 @@ import java.util.List;
 public interface UserQuizRepository extends JpaRepository<UserQuiz, Long> {
 
     List<UserQuiz> findByUser(User user);
+
+    boolean existsByUserIdAndQuizId(Long userId, Long quizId);
 }

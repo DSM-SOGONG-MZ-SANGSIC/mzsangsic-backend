@@ -4,6 +4,7 @@ import com.geunoo.mzsangsicbackend.domain.quiz.controller.dto.request.QuizReques
 import com.geunoo.mzsangsicbackend.domain.quiz.controller.dto.response.AnswerResponse;
 import com.geunoo.mzsangsicbackend.domain.quiz.controller.dto.response.QueryPickResponse;
 import com.geunoo.mzsangsicbackend.domain.quiz.controller.dto.response.QueryQuizListResponse;
+import com.geunoo.mzsangsicbackend.domain.quiz.controller.dto.response.QueryQuizRateResponse;
 import com.geunoo.mzsangsicbackend.domain.quiz.controller.dto.response.SavedQuizListResponse;
 import com.geunoo.mzsangsicbackend.domain.quiz.entity.Category;
 import com.geunoo.mzsangsicbackend.domain.quiz.service.*;
@@ -30,6 +31,7 @@ public class QuizController {
     private final QueryQuizService queryQuizService;
     private final QueryPickService queryPickService;
     private final SavedQuizService savedQuizService;
+    private final QueryQuizRateService queryQuizRateService;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/{quiz-id}")
@@ -56,5 +58,10 @@ public class QuizController {
     @GetMapping("/saved")
     public SavedQuizListResponse savedQuiz() {
         return savedQuizService.execute();
+    }
+
+    @GetMapping("/percentage/{user-id}")
+    public QueryQuizRateResponse queryQuizRate(@PathVariable("user-id") Long userId) {
+        return queryQuizRateService.execute(userId);
     }
 }
