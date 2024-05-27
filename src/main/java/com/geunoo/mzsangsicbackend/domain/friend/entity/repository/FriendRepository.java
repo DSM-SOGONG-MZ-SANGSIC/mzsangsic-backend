@@ -1,6 +1,7 @@
 package com.geunoo.mzsangsicbackend.domain.friend.entity.repository;
 
 import com.geunoo.mzsangsicbackend.domain.friend.entity.Friend;
+import com.geunoo.mzsangsicbackend.domain.quiz.entity.Quiz;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface FriendRepository extends JpaRepository<Friend, Long> {
     Optional<Friend> findByApplieUserIdAndApplyUserId(Long appliedUserId, Long applyUserId);
 
     List<Friend> findAllByApplieUserIdAndIsAccept(Long appliedUserId, boolean accept);
+
+    List<Friend> findAllByQuiz(Quiz quiz);
 }
