@@ -2,10 +2,12 @@ package com.geunoo.mzsangsicbackend.domain.user.controller;
 
 import com.geunoo.mzsangsicbackend.domain.quiz.controller.dto.request.QuizRequest;
 import com.geunoo.mzsangsicbackend.domain.user.controller.dto.request.ProfileRequest;
+import com.geunoo.mzsangsicbackend.domain.user.controller.dto.response.MypageResponse;
 import com.geunoo.mzsangsicbackend.domain.user.controller.dto.response.QueryUserResponse;
 import com.geunoo.mzsangsicbackend.domain.user.controller.dto.response.TokenResponse;
 import com.geunoo.mzsangsicbackend.domain.user.controller.dto.response.UrlResponse;
 import com.geunoo.mzsangsicbackend.domain.user.service.GoogleLoginService;
+import com.geunoo.mzsangsicbackend.domain.user.service.MypageService;
 import com.geunoo.mzsangsicbackend.domain.user.service.UserProfileService;
 import jakarta.validation.Valid;
 import com.geunoo.mzsangsicbackend.domain.user.service.QueryUserService;
@@ -20,6 +22,7 @@ public class UserController {
     private final GoogleLoginService googleLoginService;
     private final UserProfileService userProfileService;
     private final QueryUserService queryUserService;
+    private final MypageService mypageService;
 
     @PostMapping("/google")
     public TokenResponse googleLogin(
@@ -48,5 +51,10 @@ public class UserController {
     @PatchMapping("/profile")
     public void userProfile(@RequestBody @Valid ProfileRequest request) {
         userProfileService.execute(request);
+    }
+
+    @GetMapping("/mypage")
+    public MypageResponse getMypage() {
+        return mypageService.execute();
     }
 }
