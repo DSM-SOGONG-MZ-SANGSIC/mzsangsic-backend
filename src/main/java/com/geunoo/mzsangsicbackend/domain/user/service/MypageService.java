@@ -2,10 +2,8 @@ package com.geunoo.mzsangsicbackend.domain.user.service;
 
 import com.geunoo.mzsangsicbackend.domain.user.controller.dto.response.MypageResponse;
 import com.geunoo.mzsangsicbackend.domain.user.entity.User;
-import com.geunoo.mzsangsicbackend.domain.user.entity.repository.UserRepository;
 import com.gil.easyjwt.user.CurrentUserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class MypageService {
 
-    private final UserRepository userRepository;
     private final CurrentUserService<User> currentUserService;
 
     @Transactional
