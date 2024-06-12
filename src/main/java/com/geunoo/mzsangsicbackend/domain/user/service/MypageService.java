@@ -23,7 +23,7 @@ public class MypageService {
             .id(user.getId())
             .name(user.getName())
             .email(user.getEmail())
-            .profileImage(user.getProfileUrl())
+            .profileImage(user.getImage())
             .categories(userCategoryRepository.findAllByUserId(user.getId()).stream().map(UserCategory::getCategory).toList())
             .build();
     }

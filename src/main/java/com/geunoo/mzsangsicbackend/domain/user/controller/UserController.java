@@ -51,7 +51,7 @@ public class UserController {
         return queryUserService.execute();
     }
 
-    @PatchMapping(value = "/profile", consumes = "/multipart/form-data")
+    @PatchMapping(value = "/profile", consumes = "multipart/form-data")
     public void userProfile(@RequestBody @Valid ProfileRequest request) {
         userProfileService.execute(request);
     }

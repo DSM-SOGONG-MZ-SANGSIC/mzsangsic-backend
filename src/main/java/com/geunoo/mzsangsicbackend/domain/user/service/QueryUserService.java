@@ -16,7 +16,7 @@ public class QueryUserService {
     public QueryUserResponse execute() {
         return new QueryUserResponse(
             userRepository.findAll().stream()
-                .map(user -> new QueryUserResponse.UserResponse(user.getId(), user.getName(), user.getProfileUrl()))
+                .map(user -> new QueryUserResponse.UserResponse(user.getId(), user.getName(), user.getImage()))
                 .toList()
         );
     }
