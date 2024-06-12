@@ -17,17 +17,17 @@ public class UserProfileService {
     private final CurrentUserService<User> currentUserService;
 
     @Transactional
-    public void execute(ProfileRequest request, MultipartFile file) {
+    public void execute(ProfileRequest request) {
         User user = currentUserService.getCurrentUser();
+        MultipartFile image = request.getImage();
 
-        try {
-            if (file != null && !file.isEmpty()) {
-                byte[] imageBytes = file.getBytes();
+        if (image != null && !image.isEmpty()) {
+            try {
+                byte[] imageBytes = image.getBytes();
                 user.setProfileImage(imageBytes);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to read image file", e);
         }
-        user.setProfileImage(request.getImage());
     }
 }

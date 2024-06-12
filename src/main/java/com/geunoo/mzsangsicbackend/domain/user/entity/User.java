@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collection;
 
@@ -52,7 +53,7 @@ public class User extends JwtUser {
         return null;
     }
 
-    public void setProfileImage(byte[] profileUrl) {
-        this.image = profileUrl;
+    public void setProfileImage(byte[] image) {
+        this.image = image;
     }
 }
