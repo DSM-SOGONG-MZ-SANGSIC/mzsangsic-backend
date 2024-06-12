@@ -7,5 +7,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProfileRequest {
 
-    private String imageUrl;
+    private byte[] image;
 }

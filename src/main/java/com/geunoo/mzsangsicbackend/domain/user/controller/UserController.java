@@ -64,6 +64,12 @@ public class UserController {
         userProfileService.execute(request);
     }
 
+    @PatchMapping(value = "/profile", consumes = "/multipart/form-data")
+    public void userProfile(@Valid ProfileRequest request,
+                            @RequestPart(value = "file", required = false) MultipartFile file) {
+        userProfileService.execute(request, file);
+    }
+
     @GetMapping("/mypage")
     public MypageResponse getMypage() {
         return mypageService.execute();
