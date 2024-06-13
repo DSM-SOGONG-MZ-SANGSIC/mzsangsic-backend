@@ -40,7 +40,7 @@ public class GoogleLoginService {
                 User.builder()
                     .email(userInfo.getEmail())
                     .name(userInfo.getName())
-                    .profileUrl(userInfo.getPicture())
+                        .image(userInfo.getPicture())
                     .sub(userInfo.getSub())
                     .build()
             ));
@@ -58,7 +58,7 @@ public class GoogleLoginService {
                 User.builder()
                     .email(userInfo.getEmail())
                     .name(userInfo.getName())
-                    .profileUrl(userInfo.getPicture())
+                    .image(userInfo.getPicture())
                     .sub(userInfo.getSub())
                     .build()
             ));

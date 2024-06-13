@@ -25,7 +25,7 @@ public class QueryApplyUsersService {
                     new QueryUserResponse.UserResponse(
                         friend.getApplyUser().getId(),
                         friend.getApplyUser().getName(),
-                        friend.getApplyUser().getProfileUrl()
+                        friend.getApplyUser().getImage()
                     )
                 ).toList()
         );

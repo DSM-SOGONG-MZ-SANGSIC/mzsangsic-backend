@@ -2,6 +2,7 @@ package com.geunoo.mzsangsicbackend.domain.user.controller.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -15,6 +16,6 @@ public class QueryUserResponse {
     public static class UserResponse {
         private final Long id;
         private final String name;
-        private final String profileImage;
+        private final byte[] profileImage;
     }
 }

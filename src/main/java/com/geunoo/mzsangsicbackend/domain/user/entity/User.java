@@ -1,16 +1,13 @@
 package com.geunoo.mzsangsicbackend.domain.user.entity;
 
 import com.gil.easyjwt.user.JwtUser;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collection;
 
@@ -31,19 +28,18 @@ public class User extends JwtUser {
     @Column(columnDefinition = "VARCHAR(50)")
     private String name;
 
-    @NotNull
-    @Column(columnDefinition = "VARCHAR(255)")
-    private String profileUrl;
+    @Lob
+    private byte[] image;
 
     @NotNull
     @Column(columnDefinition = "VARCHAR(255)")
     private String sub;
 
     @Builder
-    public User(String email, String name, String profileUrl, String sub) {
+    public User(String email, String name, byte[] image, String sub) {
         this.email = email;
         this.name = name;
-        this.profileUrl = profileUrl;
+        this.image = image;
         this.sub = sub;
     }
 
@@ -57,7 +53,7 @@ public class User extends JwtUser {
         return null;
     }
 
-    public void setProfileImageUrl(String profileUrl) {
-        this.profileUrl = profileUrl;
+    public void setProfileImage(byte[] image) {
+        this.image = image;
     }
 }

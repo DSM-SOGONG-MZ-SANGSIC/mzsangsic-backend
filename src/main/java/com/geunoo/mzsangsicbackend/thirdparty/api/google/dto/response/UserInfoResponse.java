@@ -9,6 +9,6 @@ public class UserInfoResponse {
 
     private final String sub;
     private final String name;
-    private final String picture;
+    private final byte[] picture;
     private final String email;
 }

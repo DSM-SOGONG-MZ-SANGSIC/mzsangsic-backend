@@ -6,6 +6,9 @@ import com.gil.easyjwt.user.CurrentUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RequiredArgsConstructor
 @Service
@@ -16,6 +19,15 @@ public class UserProfileService {
     @Transactional
     public void execute(ProfileRequest request) {
         User user = currentUserService.getCurrentUser();
-        user.setProfileImageUrl(request.getImageUrl());
+        MultipartFile image = request.getImage();
+
+        if (image != null && !image.isEmpty()) {
+            try {
+                byte[] imageBytes = image.getBytes();
+                user.setProfileImage(imageBytes);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
