@@ -37,7 +37,7 @@ public class QuizQuerydslRepository {
 
     public Long queryCorrectFriendQuizCount(Long quizId, List<Long> friendUserId) {
         return queryFactory
-            .select(solvedQuiz.count())
+            .select(solvedQuiz.countDistinct())
             .from(solvedQuiz)
             .join(solvedQuiz.user, user)
             .join(solvedQuiz.quiz, quiz)
